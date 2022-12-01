@@ -3,6 +3,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    int rowNumber = 1;
 }
 
 <div class="h1">
@@ -27,29 +28,20 @@
         </thead>
         <tbody>
             
-                <tr>
-                    <td>1</td>
-                    <td>Asd</td>
-                    <td>100</td>
-                    <td>Estonia</td>
-                    <td>Tuulest Viidud</td>
-                    <td>
-                        <a asp-action="edit" asp-controller="spaceships" asp-route-id="" class="btn btn-primary">Edit</a>
-                        <input asp-action="delete" asp-controller="spaceships" asp-route-id="" type="submit" class="btn btn-danger" value="Delete" />
-                    </td>
-                </tr>
-            
-        </tbody>
-        <tbody>
             @foreach (var spaceship in Model)
             {
                 <tr>
-                    <td>1</td>
+                    <td>@rowNumber</td>
                     <td>@spaceship.Name</td>
                     <td>@spaceship.Type</td>
                     <td>@spaceship.Passengers</td>                    
                     <td>@spaceship.EnginePower</td>
+                    <td>
+                        <a asp-action="edit" asp-controller="spaceships" asp-route-id="@spaceship.Id" class="btn btn-primary">Edit</a>
+                        <input asp-action="delete" asp-controller="spaceships" asp-route-id="@spaceship.Id" type="submit" class="btn btn-danger" value="Delete" />
+                    </td>
                 </tr>
+                rowNumber++;
             }
         </tbody>
     </table>
