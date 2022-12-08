@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TARge21Shop.Core.Domain.Spaceship;
 using TARge21Shop.Core.Dto;
+using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
 
 namespace TARge21Shop.ApplicationServices.Services
 {
-    public class SpaceshipsServices
+    public class SpaceshipsServices : ISpaceshipsServices
     {
         private readonly TARge21ShopContext _context;
         public SpaceshipsServices(TARge21ShopContext context)

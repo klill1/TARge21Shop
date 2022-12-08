@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TARge21Shop.Core.Dto;
+using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
 using TARge21Shop.Models.Spaceship;
 
@@ -8,13 +9,16 @@ namespace TARge21Shop.Controllers
     public class SpaceshipsController : Controller
     {
         private readonly TARge21ShopContext _context;
+        private readonly ISpaceshipsServices _spaceshipsServices;
 
         public SpaceshipsController
             (
-                TARge21ShopContext context
+                TARge21ShopContext context,
+                ISpaceshipsServices spaceshipsServices
             )
         {
             _context = context;
+            _spaceshipsServices = spaceshipsServices;
         }
 
         public IActionResult Index()
@@ -63,9 +67,14 @@ namespace TARge21Shop.Controllers
 
             };
 
+            var result = await _spaceshipsServices.Add(dto);
 
+            if (result is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
-            return View();
+            return RedirectToAction(nameof(Index), vm);
         }
     }
 }
