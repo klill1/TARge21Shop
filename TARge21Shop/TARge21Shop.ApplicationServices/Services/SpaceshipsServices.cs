@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,5 +45,42 @@ namespace TARge21Shop.ApplicationServices.Services
 
             return domain;
         }
+
+        public async Task<Spaceship> Update(SpaceshipDto dto)
+        {
+            var domain = new Spaceship()
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Type = dto.Type,
+                Crew = dto.Crew,
+                Passengers = dto.Passengers,
+                CargoWeight = dto.CargoWeight,
+                FullTripsCount = dto.FullTripsCount,
+                MaintenanceCount = dto.MaintenanceCount,
+                LastMaintenance = dto.LastMaintenance,
+                EnginePower = dto.EnginePower,
+                MaidenLaunch = dto.MaidenLaunch,
+                BuiltDate = dto.BuiltDate,
+                CreatedAt = dto.CreatedAt,
+                ModifiedAt = DateTime.Now
+
+            };
+
+            _context.SpaceShips.Update(domain);
+            await _context.SaveChangesAsync();
+
+            return domain;
+        }
+
+        public async Task<Spaceship> GetUpdate(Guid id)
+        {
+            var result = await _context.SpaceShips
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
+        
     }
 }
