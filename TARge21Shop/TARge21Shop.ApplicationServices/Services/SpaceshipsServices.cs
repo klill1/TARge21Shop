@@ -81,6 +81,24 @@ namespace TARge21Shop.ApplicationServices.Services
             return result;
         }
 
-        
+        public async Task<Spaceship> Delete(Guid id)
+        {
+            var spaceshipId = await _context.SpaceShips
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.SpaceShips.Remove(spaceshipId);
+            await _context.SaveChangesAsync();
+
+            return spaceshipId;
+        }
+
+        public async Task<Spaceship> GetAsync(Guid id)
+        {
+            var result = await _context.SpaceShips
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
     }
 }
