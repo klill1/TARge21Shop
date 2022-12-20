@@ -1,0 +1,72 @@
+﻿@model TARge21Shop.Models.Car.CarDetailsViewModel
+
+<h1>Details</h1>
+
+<div>
+    <h4>Cars</h4>
+    <hr />
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Id)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Name)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Type" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Type)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.EnginePower)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Weight" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Weight)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Lenght" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Lenght)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Width" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Width)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="MaxSpeed" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.MaxSpeed)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Mileage" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Mileage)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="FuelType" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.FuelType)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="FuelConsumption" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.FuelConsumption)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="ProductionDate" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.ProductionDate)
+        </div>  
+    </dl>
+
+    <a asp-action="Index" asp-controller="car" class="btn btn-primary">Index</a>
+
+</div>
