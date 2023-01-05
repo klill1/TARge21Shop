@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace TARge21Shop.Core.Dto
 {
@@ -14,9 +16,11 @@ namespace TARge21Shop.Core.Dto
         public int MaintenanceCount { get; set; }
         public DateTime LastMaintenance { get; set; }
         public int EnginePower { get; set; }
-
         public DateTime MaidenLaunch { get; set; }
         public DateTime BuiltDate { get; set; }
+
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToDatabaseDto> Image { get; set; } = new List<FileToDatabaseDto>();
 
         // only in database
         public DateTime CreatedAt { get; set; }

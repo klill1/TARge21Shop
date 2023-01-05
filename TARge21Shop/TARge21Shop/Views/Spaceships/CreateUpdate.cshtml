@@ -1,10 +1,10 @@
-﻿@model TARge21Shop.Models.Spaceship.SpaceshipEditViewModel
+﻿@model TARge21Shop.Models.Spaceship.SpaceshipCreateUpdateViewModel
 
 @if (Model.Id.HasValue)
 {
     <h1>Update</h1>
 } else {
-    <h1>Add</h1>
+    <h1>Create</h1>
 }
 
 
@@ -90,21 +90,25 @@
                 <input asp-for="BuiltDate" class="form-control" />
             </div>
         </div>
-        <hr/>
+        <hr />
 
+        @foreach (var images in Model.Image)
+        {
+            <partial name="_Images" model="images" />
+        }
 
-        <!-- <a asp-action="edit" asp-controller="spaceships" class="btn btn-primary">Edit</a> -->      
+        <hr />
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="Update" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Update" />
+            <input asp-action="update" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Update" />
         }
         else
         {
-            <input asp-action="add" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Add" />
+            <input asp-action="create" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Create" />
         }
 
-        <a asp-action="index" class="btn btn-primary">Index</a>
+        <a asp-action="index" class="btn btn-primary">Back</a>
         
 
     </form>
