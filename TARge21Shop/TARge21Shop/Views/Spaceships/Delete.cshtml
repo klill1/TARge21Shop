@@ -76,6 +76,13 @@
                 @Html.DisplayFor(model => model.ModifiedAt)
             </div>
 
+            @foreach (var images in Model.Image)
+            {
+                <partial name="_Images" model="images" />
+            }
+
+
+
         </dl>
 </div>
 <hr />

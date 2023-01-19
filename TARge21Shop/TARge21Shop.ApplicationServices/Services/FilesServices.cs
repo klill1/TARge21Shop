@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,20 @@ namespace TARge21Shop.ApplicationServices.Services
 
                 }
             }
+        }
+
+        public async Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto)
+        {
+            var image = await _context.FileToDatabases
+                .Where(x => x.Id == dto.Id)
+                .FirstOrDefaultAsync();
+
+            _context.FileToDatabases.Remove(image);
+            await _context.SaveChangesAsync();
+
+
+
+            return image;
         }
     }
 }
