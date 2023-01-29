@@ -61,5 +61,21 @@ namespace TARge21Shop.ApplicationServices.Services
 
             return image;
         }
+
+        public async Task<List<FileToDatabase>> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                var image = await _context.FileToDatabases
+                .Where(x => x.Id == dto.Id)
+                .FirstOrDefaultAsync();
+
+                _context.FileToDatabases.Remove(image);
+                await _context.SaveChangesAsync();
+            }
+
+
+            return null;
+        }
     }
 }
