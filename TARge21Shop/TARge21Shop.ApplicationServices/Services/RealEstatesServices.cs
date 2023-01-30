@@ -25,10 +25,10 @@ namespace TARge21Shop.ApplicationServices.Services
 
         public async Task<RealEstate> GetAsync(Guid id)
         {
-            var result = await _context.RealEstates
-                .FirstOrDefaultAsync(x => x.Id == id);
+            //var result = await _context.RealEstates
+            //    .FirstOrDefaultAsync(x => x.Id == id);
 
-            return result;
+            return null;
         }
 
         public async Task<RealEstate> Create(RealEstateDto dto)
