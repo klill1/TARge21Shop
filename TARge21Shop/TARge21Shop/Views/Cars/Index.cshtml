@@ -1,5 +1,47 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<TARge21Shop.Models.Car.CarIndexViewModel>
+
 @{
+    int rowNumber = 1;
 }
+
+<div class="h1">
+    Cars
+</div>
+
+<div>
+    <a asp-action="create" asp-controller="cars" type="submit" class="btn btn-primary">Create</a>
+</div>
+
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nr</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Fuel Type</th>
+                <th scope="col">EnginePower</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var car in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@car.Name</td>
+                    <td>@car.Type</td>
+                    <td>@car.FuelType</td>
+                    <td>@car.EnginePower</td>
+                    <td>
+                        <a asp-action="details" asp-controller="cars" asp-route-id="@car.Id" class="btn btn-info">Details</a>
+                        <a asp-action="update" asp-controller="cars" asp-route-id="@car.Id" class="btn btn-primary">Update</a>
+                        <a asp-action="delete" asp-controller="cars" asp-route-id="@car.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                rowNumber++;
+            }
+        </tbody>
+    </table>
+</form>
