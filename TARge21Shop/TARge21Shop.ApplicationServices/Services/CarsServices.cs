@@ -45,10 +45,10 @@ namespace TARge21Shop.ApplicationServices.Services
             car.CreatedAt = DateTime.Now;
             car.ModifiedAt = DateTime.Now;
 
-            //if (dto.Files != null)
-            //{
-            //    _files.UploadFilesToDatabase(dto, car);
-            //}
+            if (dto.Files != null)
+            {
+                _files.UploadFilesToDatabase(dto, car);
+            }
 
             await _context.Cars.AddAsync(car);
             await _context.SaveChangesAsync();
@@ -76,10 +76,10 @@ namespace TARge21Shop.ApplicationServices.Services
                 ModifiedAt = DateTime.Now
             };
 
-            //if (dto.Files != null)
-            //{
-            //    _files.UploadFilesToDatabase(dto, domain);
-            //}
+            if (dto.Files != null)
+            {
+                _files.UploadFilesToDatabase(dto, domain);
+            }
 
             _context.Cars.Update(domain);
             await _context.SaveChangesAsync();
@@ -102,7 +102,7 @@ namespace TARge21Shop.ApplicationServices.Services
                 })
                 .ToArrayAsync();
 
-            //await _files.RemoveImageFromDatabase(images);
+            await _files.RemoveImagesFromDatabase(images);
             _context.Cars.Remove(carId);
             await _context.SaveChangesAsync();
 
