@@ -18,9 +18,9 @@
             <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Fuel Type</th>
                 <th scope="col">EnginePower</th>
+                <th scope="col">Mileage</th>
+                <th scope="col">Fuel Type</th>
                 <th></th>
             </tr>
         </thead>
@@ -31,9 +31,9 @@
                 <tr>
                     <td>@rowNumber</td>
                     <td>@car.Name</td>
-                    <td>@car.Type</td>
-                    <td>@car.FuelType</td>
                     <td>@car.EnginePower</td>
+                    <td>@car.Mileage</td>
+                    <td>@car.FuelType</td>
                     <td>
                         <a asp-action="details" asp-controller="cars" asp-route-id="@car.Id" class="btn btn-info">Details</a>
                         <a asp-action="update" asp-controller="cars" asp-route-id="@car.Id" class="btn btn-primary">Update</a>
