@@ -48,6 +48,30 @@ namespace TARge21Shop.ApplicationServices.Services
             }
         }
 
+        public void UploadFilesToDatabase(CarDto dto, Car domain)
+        {
+            if (dto.Files != null && dto.Files.Count > 0)
+            {
+                foreach (var photo in dto.Files)
+                {
+                    using (var target = new MemoryStream())
+                    {
+                        FileToDatabase files = new FileToDatabase()
+                        {
+                            Id = Guid.NewGuid(),
+                            ImageTitle = photo.FileName,
+                            CarId = domain.Id,
+                        };
+
+                        photo.CopyTo(target);
+                        files.ImageData = target.ToArray();
+
+                        _context.FileToDatabases.Add(files);
+                    }
+                }
+            }
+        }
+
         public async Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto)
         {
             var image = await _context.FileToDatabases
