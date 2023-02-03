@@ -7,7 +7,6 @@ using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
 using TARge21Shop.Models.Car;
-using TARge21Shop.Models.Spaceship;
 
 namespace TARge21Shop.Controllers
 {
@@ -40,8 +39,8 @@ namespace TARge21Shop.Controllers
                     EnginePower = x.EnginePower,
                     Mileage = x.Mileage,
                     FuelType = x.FuelType,
-                    //FuelConsumption = x.FuelConsumption,
-                    //BuiltDate = x.BuiltDate,
+                    FuelConsumption = x.FuelConsumption,
+                    BuiltDate = x.BuiltDate,
 
                 });
 
@@ -163,7 +162,7 @@ namespace TARge21Shop.Controllers
                     Id = x.ImageId,
                     ImageData = x.ImageData,
                     ImageTitle = x.ImageTitle,
-                    SpaceshipId = x.SpaceshipId,
+                    CarId = x.CarId,
                 }).ToArray()
             };
 

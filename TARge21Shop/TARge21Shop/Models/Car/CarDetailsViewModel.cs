@@ -1,6 +1,4 @@
-﻿using TARge21Shop.Models.Spaceship;
-
-namespace TARge21Shop.Models.Car
+﻿namespace TARge21Shop.Models.Car
 {
     public class CarDetailsViewModel
     {

@@ -10,10 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TARge21ShopContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
-builder.Services.AddScoped<IFilesServices, FilesServices>();
-builder.Services.AddScoped<IRealEstatesServices, RealEstatesServices>();
 builder.Services.AddScoped<ICarServices, CarsServices>();
+builder.Services.AddScoped<IFilesServices, FilesServices>();
 
 var app = builder.Build();
 

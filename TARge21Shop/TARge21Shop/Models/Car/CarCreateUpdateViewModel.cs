@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TARge21Shop.Models.Spaceship;
+
 
 namespace TARge21Shop.Models.Car
 {

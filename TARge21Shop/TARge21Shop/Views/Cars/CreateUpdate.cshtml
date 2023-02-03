@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-group row">
-            <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
+            <label asp-for="EnginePower" class="col-sm-2 col-form-label">Engine Power</label>
             <div class="col-sm-10">
                 <input asp-for="EnginePower" class="form-control" />
             </div>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group row">
-            <label asp-for="MaxSpeed" class="col-sm-2 col-form-label"></label>
+            <label asp-for="MaxSpeed" class="col-sm-2 col-form-label">Max Speed</label>
             <div class="col-sm-10">
                 <input asp-for="MaxSpeed" class="form-control" />
             </div>
@@ -71,21 +71,21 @@
         </div>
 
         <div class="form-group row">
-            <label asp-for="FuelType" class="col-sm-2 col-form-label"></label>
+            <label asp-for="FuelType" class="col-sm-2 col-form-label">Fuel Type</label>
             <div class="col-sm-10">
                 <input asp-for="FuelType" class="form-control" />
             </div>
         </div>
 
         <div class="form-group row">
-            <label asp-for="FuelConsumption" class="col-sm-2 col-form-label"></label>
+            <label asp-for="FuelConsumption" class="col-sm-2 col-form-label">Fuel Consumption</label>
             <div class="col-sm-10">
                 <input asp-for="FuelConsumption" class="form-control" />
             </div>
         </div>
 
         <div class="form-group row">
-            <label asp-for="BuiltDate" class="col-sm-2 col-form-label"></label>
+            <label asp-for="BuiltDate" class="col-sm-2 col-form-label">Built Date</label>
             <div class="col-sm-10">
                 <input asp-for="BuiltDate" class="form-control" />
             </div>
@@ -105,7 +105,11 @@
         @foreach (var images in Model.Image)
         {
             <partial name="_Images" model="images" />
-            <input asp-action="removeImage" asp-controller="cars" asp-route-imageId="@images.ImageId" type="submit" class="btn btn-outline-danger" value="Remove Image" />
+            <div class="form-group row col-sm-4 offset-2" style="padding: 12px">
+                <input asp-action="removeImage" asp-controller="cars" asp-route-imageId="@images.ImageId" type="submit" class="btn btn-danger" value="Remove Image" />
+            </div>
+            
+
         }
 
         <hr />
