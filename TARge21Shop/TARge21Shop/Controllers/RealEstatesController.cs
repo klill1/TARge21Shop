@@ -78,5 +78,11 @@ namespace TARge21Shop.Controllers
 
             return RedirectToAction("Index", vm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            return View();
+        }
     }
 }
