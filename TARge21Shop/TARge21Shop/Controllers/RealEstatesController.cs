@@ -1,49 +1,82 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
+using TARge21Shop.Data;
 using TARge21Shop.Models.RealEstate;
 
 namespace TARge21Shop.Controllers
 {
     public class RealEstatesController : Controller
     {
-        private readonly IRealEstatesServices _realEstates;
+        private readonly IRealEstatesServices _realEstatesServices;
+        private readonly TARge21ShopContext _context;
 
         public RealEstatesController
             (
-                IRealEstatesServices realEstates
+                IRealEstatesServices realEstatesServices,
+                TARge21ShopContext context
+
             )
         {
-            _realEstates = realEstates;
+            _realEstatesServices = realEstatesServices;
+            _context = context;
         }
+
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            //var realEstate = await _realEstates.GetAsync();
+            var result = _context.RealEstates
+                 .OrderByDescending(y => y.CreatedAt)
+                 .Select(x => new RealEstateIndexViewModel
+                 {
+                     Id = x.Id,
+                     Address = x.Address,
+                     City = x.City,
+                     Country = x.Country,
+                     Size = x.Size,
+                     Price = x.Price,
+                 });
 
-            //if(realEstate == null)
-            //{
-            //    return NotFound();
-            //}
+            return View(result);
+        }
 
-            var vm = new RealEstateIndexViewModel();
+        [HttpGet]
+        public IActionResult Create()
+        {
+            RealEstateCreateUpdateViewModel vm = new();
 
-            //vm.Id = id;
-            //vm.Address = realEstate.Address;
-            //vm.City = realEstate.City;
-            //vm.Region = realEstate.Region;
-            //vm.PostalCode = realEstate.PostalCode;
-            //vm.Country = realEstate.Country;
-            //vm.Phone = realEstate.Phone;
-            //vm.Fax = realEstate.Fax;
-            //vm.Size = realEstate.Size;
-            //vm.Floor = realEstate.Floor;
-            //vm.Price = realEstate.Price;
-            //vm.RoomCount = realEstate.RoomCount;
-            //vm.CreatedAt = realEstate.CreatedAt;
-            //vm.ModifiedAt = realEstate.ModifiedAt;
+            return View("CreateUpdate", vm);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(RealEstateCreateUpdateViewModel vm)
+        {
+            var dto = new RealEstateDto()
+            {
+                Id = vm.Id,
+                Address = vm.Address,
+                City = vm.City,
+                Country = vm.Country,
+                Size = vm.Size,
+                Price = vm.Price,
+                Floor = vm.Floor,
+                Region = vm.Region,
+                Phone = vm.Phone,
+                Fax = vm.Fax,
+                PostalCode = vm.PostalCode,
+                RoomCount = vm.RoomCount,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt
+            };
 
-            return View(vm);
+            var result = await _realEstatesServices.Create(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction("Index", vm);
         }
     }
 }
