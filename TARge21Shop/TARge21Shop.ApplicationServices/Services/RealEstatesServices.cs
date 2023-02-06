@@ -61,5 +61,50 @@ namespace TARge21Shop.ApplicationServices.Services
 
             return realEstate;
         }
+        
+        public async Task<RealEstate> Update(RealEstateDto dto)
+        {
+            var domain = new RealEstate()
+            {
+                Id = dto.Id
+                realEstate.Address = dto.Address;
+                realEstate.City = dto.City;
+                realEstate.Region = dto.Region;
+                realEstate.PostalCode = dto.PostalCode; 
+                realEstate.Country = dto.Country;
+                realEstate.Phone = dto.Phone;
+                realEstate.Fax = dto.Fax;
+                realEstate.Size = dto.Size;
+                realEstate.Floor = dto.Floor;
+                realEstate.Price = dto.Price;
+                realEstate.RoomCount = dto.RoomCount;
+                realEstate.CreatedAt = dto.CreatedAt;
+                realEstate.ModifiedAt = DateTime.Now;
+            };
+            
+            _context.RealEstates.Update(domain);
+            await _context.SaveChangesAsync();
+            
+            return domain;
+        }
+        
+        public async Task<RealEstate> Delete(Guid id)
+        {
+            var realestateId = await _context.RealEstates
+                .FirstOrDefaultAsync(x => x.Id == id);
+            
+            _context.RealEstates.Remove(realestateId);
+            await _context.SaveChangesAsync();
+            
+            return realestateId;
+        }
+        
+        public async Task<RealEstate> GetAsync(Guid id)
+        {
+            var result = await _context.RealEstates
+                .FirstOrDefaultAsync(x => x.Id == id);
+            
+            return result;
+        }
     }
 }
