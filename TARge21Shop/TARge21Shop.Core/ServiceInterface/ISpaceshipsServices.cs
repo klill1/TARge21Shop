@@ -9,7 +9,5 @@ namespace TARge21Shop.Core.ServiceInterface
         Task<Spaceship> Update(SpaceshipDto dto);
         Task<Spaceship> Delete(Guid id);
         Task<Spaceship> GetAsync(Guid id);
-
-
     }
 }

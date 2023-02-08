@@ -15,7 +15,7 @@ namespace TARge21Shop.Controllers
         public RealEstatesController
             (
                 IRealEstatesServices realEstatesServices,
-                TARge21ShopContext context,
+                TARge21ShopContext context
                 // IFilesServices filesServices
 
             )
@@ -261,7 +261,7 @@ namespace TARge21Shop.Controllers
         {
             var realestateId = await _realEstatesServices.Delete(id);
 
-            if (spaceshipId is null)
+            if (realestateId is null)
             {
                 return RedirectToAction(nameof(Index));
             }

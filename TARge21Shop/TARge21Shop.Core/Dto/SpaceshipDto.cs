@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace TARge21Shop.Core.Dto
 {

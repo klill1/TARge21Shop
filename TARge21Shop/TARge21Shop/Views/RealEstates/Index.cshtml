@@ -11,7 +11,7 @@
 </div>
 
 <div>
-    <a asp-action="create" asp-controller="realEstates" type="submit" class="btn btn-primary">Create</a>
+    <a asp-action="create" asp-controller="RealEstates" type="submit" class="btn btn-primary">Create</a>
 </div>
 
 <form method="post">
@@ -37,9 +37,9 @@
                     <td>@realEstate.Size</td>                    
                     <td>@realEstate.Price</td>
                     <td>
-                        <a asp-action="details" asp-controller="realEstates" asp-route-id="@realEstate.Id" class="btn btn-info">Details</a>
-                        <a asp-action="update" asp-controller="realEstates" asp-route-id="@realEstate.Id" class="btn btn-primary">Update</a>
-                        <a asp-action="delete" asp-controller="realEstates" asp-route-id="@realEstate.Id" class="btn btn-danger">Delete</a>
+                        <a asp-action="details" asp-controller="RealEstates" asp-route-id="@realEstate.Id" class="btn btn-info">Details</a>
+                        <a asp-action="update" asp-controller="RealEstates" asp-route-id="@realEstate.Id" class="btn btn-primary">Update</a>
+                        <a asp-action="delete" asp-controller="RealEstates" asp-route-id="@realEstate.Id" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 rowNumber++;

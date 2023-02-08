@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group row">
-                <label asp-for="PostalCode" class="col-sm-2 col-form-label"></label>
+                <label asp-for="PostalCode" class="col-sm-2 col-form-label">Postal Code</label>
                 @Html.DisplayFor(model => model.PostalCode)
             </div>
 
@@ -62,17 +62,17 @@
             </div>
 
             <div class="form-group row">
-                <label asp-for="RoomCount" class="col-sm-2 col-form-label"></label>
+                <label asp-for="RoomCount" class="col-sm-2 col-form-label">Room Count</label>
                 @Html.DisplayFor(model => model.RoomCount)
             </div>
 
             <div class="form-group row">
-                <label asp-for="CreatedAt" class="col-sm-2 col-form-label"></label>
+                <label asp-for="CreatedAt" class="col-sm-2 col-form-label">Created At</label>
                 @Html.DisplayFor(model => model.CreatedAt)
             </div>
 
             <div class="form-group row">
-                <label asp-for="ModifiedAt" class="col-sm-2 col-form-label"></label>
+                <label asp-for="ModifiedAt" class="col-sm-2 col-form-label">Modified At</label>
                 @Html.DisplayFor(model => model.ModifiedAt)
             </div>
 
@@ -89,5 +89,5 @@
 <form asp-action="DeleteConfirmation">
     <input type="hidden" asp-for="Id" />
     <input type="submit" value="Delete" class="btn btn-danger" />
-    <a asp-action="index" asp-controller="realestates" class="btn btn-success">Back</a>
+    <a asp-action="index" asp-controller="RealEstates" class="btn btn-success">Back</a>
 </form>
