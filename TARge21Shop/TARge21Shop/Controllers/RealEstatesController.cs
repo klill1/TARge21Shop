@@ -70,14 +70,14 @@ namespace TARge21Shop.Controllers
                 RoomCount = vm.RoomCount,
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt,
-                /* Files = vm.files,
-                Image = vm.Image.Select(x => new FileToDatabaseDto
+                Files = vm.Files,
+                FileToApiDtos = vm.FileToApiViewModels.Select(x => new FileToApiDto
                 {
                     Id = x.ImageId,
-                    ImageData = x.ImageData,
-                    ImageTitle = x.ImageTitle,
-                    RealEstateId = x.RealEstateId,
-                }).ToArray() */
+                    ExistingFilePath = x.FilePath,
+                    RealEstateId = x.RealEstateId
+                }).ToArray()
+                
             };
 
             var result = await _realEstatesServices.Create(dto);
