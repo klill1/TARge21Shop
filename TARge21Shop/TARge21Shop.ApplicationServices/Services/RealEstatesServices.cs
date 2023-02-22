@@ -21,24 +21,9 @@ namespace TARge21Shop.ApplicationServices.Services
             _filesServices = filesServices;
         }
 
-        //public IEnumerable<RealEstate> GetAllRealEstates()
-        //{
-        //       var result = _context.RealEstates
-        //            .OrderByDescending(y => y.CreatedAt)
-        //            .Select(x => new RealEstate
-        //            {
-        //                Id = x.Id,
-        //                Price = x.Price,
-        //            });
-
-        //    return result;
-
-        //}
-
         public async Task<RealEstate> Create(RealEstateDto dto)
         {
             RealEstate realEstate = new();
-            //FileToDatabase file = new FileToDatabase();
 
             realEstate.Id = Guid.NewGuid();
             realEstate.Address = dto.Address;
@@ -56,11 +41,6 @@ namespace TARge21Shop.ApplicationServices.Services
             realEstate.ModifiedAt = DateTime.Now;
             _filesServices.FilesToApi(dto, realEstate);
             
-
-            //if (dto.Files != null)
-            //{
-            //    _files.UploadFilesToDatabase(dto, realEstate);
-            //}
 
             await _context.RealEstates.AddAsync(realEstate);
             await _context.SaveChangesAsync();
@@ -88,11 +68,6 @@ namespace TARge21Shop.ApplicationServices.Services
                 ModifiedAt = DateTime.Now
             };
 
-            //if (dto.Files != null)
-            //{
-            //    _files.UploadFilesToDatabase(dto, domain);
-            //}
-
             _context.RealEstates.Update(domain);
             await _context.SaveChangesAsync();
             
@@ -102,19 +77,19 @@ namespace TARge21Shop.ApplicationServices.Services
         public async Task<RealEstate> Delete(Guid id)
         {
             var realestateId = await _context.RealEstates
+                .Include(x => x.FileToApis)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            //var images = await _context.FileToDatabases
-            //    .Where(x => x.RealEstateId == id)
-            //    .Select(y => new FileToDatabaseDto
-            //    {
-            //        Id = y.Id,
-            //        ImageTitle = y.ImageTitle,
-            //        RealEstateId = y.RealEstateId,
-            //    })
-            //    .ToArrayAsync();
+            var images = await _context.FileToApis
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiDto
+                {
+                    Id = y.Id,
+                    ExistingFilePath = y.ExistingFilePath,
+                    RealEstateId = y.RealEstateId,
+                }).ToArrayAsync();
 
-            //await _files.RemoveImagesFromDatabase(images);
+            await _filesServices.RemoveImagesFromApi(images);
             _context.RealEstates.Remove(realestateId);
             await _context.SaveChangesAsync();
             
