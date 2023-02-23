@@ -117,7 +117,7 @@ namespace TARge21Shop.ApplicationServices.Services
 
         }
 
-        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApi[] dtos)
+        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos)
         {
             foreach (var dto in dtos)
             {
