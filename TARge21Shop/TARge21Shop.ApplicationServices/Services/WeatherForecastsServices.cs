@@ -14,12 +14,11 @@ namespace TARge21Shop.ApplicationServices.Services
             string apikey = "minAIzidtGC1fAIf0lkY5GqXfGDceexJ";
             var url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/127964?apikey=minAIzidtGC1fAIf0lkY5GqXfGDceexJ&metric=true";
 
-
             using (WebClient client = new WebClient())
             {
                 string json = client.DownloadString(url);
 
-                WeatherRootDto weatherInfo = (new JavaScriptSerializer()).Deserialize<WeatherRootDto>(json);
+                WeatherRootDto weatherInfo = new JavaScriptSerializer().Deserialize<WeatherRootDto>(json);
 
                 dto.EffectiveDate = weatherInfo.Headline.EffectiveDate;
                 dto.EffectiveEpochDate = weatherInfo.Headline.EffectiveEpochDate;
@@ -32,9 +31,6 @@ namespace TARge21Shop.ApplicationServices.Services
                 dto.MobileLink = weatherInfo.Headline.MobileLink;
                 dto.Link = weatherInfo.Headline.Link;
 
-                //dto.DailyForecastsDay = weatherInfo.DailyForecasts[0];
-                //dto.DailyForecastsEpochDate = weatherInfo.DailyForecasts[0].EpochDate;
-
                 dto.TempMinValue = weatherInfo.DailyForecasts[0].Temperature.Minimum.Value;
                 dto.TempMinUnit = weatherInfo.DailyForecasts[0].Temperature.Minimum.Unit;
                 dto.TempMinUnitType = weatherInfo.DailyForecasts[0].Temperature.Minimum.UnitType;
@@ -45,7 +41,7 @@ namespace TARge21Shop.ApplicationServices.Services
 
                 dto.DayIcon = weatherInfo.DailyForecasts[0].Day.Icon;
                 dto.DayIconPhrase = weatherInfo.DailyForecasts[0].Day.IconPhrase;
-                dto.DayHasPrecipitation = weatherInfo.DailyForecasts[0].Day.HasPrecipitation;
+                dto.DayHasPercipitation = weatherInfo.DailyForecasts[0].Day.HasPrecipitation;
                 dto.DayPrecipitationType = weatherInfo.DailyForecasts[0].Day.PrecipitationType;
                 dto.DayPrecipitationIntensity = weatherInfo.DailyForecasts[0].Day.PrecipitationIntensity;
 
