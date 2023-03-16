@@ -55,5 +55,27 @@ namespace TARge21Shop.ApplicationServices.Services
 
             return dto;
         }
+
+        public async Task<OpenWeatherResultDto> WeatherDetailsForOpenWeather(OpenWeatherResultDto dto)
+        {
+
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q=Tamsalu&appid=355bef71ce6c120e7b4a23586093c189";
+
+            using (WebClient client = new WebClient())
+            {
+                string json = client.DownloadString(url);
+                OpenWeatherDto weatherResult = new JavaScriptSerializer().Deserialize<OpenWeatherDto>(json);
+                double kelvin = 272.15;
+
+                dto.CityName = weatherResult.Name;
+                dto.Temperature = Math.Round(weatherResult.Main.Temp - kelvin, 2);
+                dto.TempFeelsLike = Math.Round(weatherResult.Main.Feels_Like - kelvin, 2);
+                dto.Humidity = weatherResult.Main.Humidity;
+                dto.Pressure = weatherResult.Main.Pressure;
+                dto.WindSpeed = weatherResult.Wind.Speed;
+                dto.WeatherCondition = weatherResult.Weather[0].Description;
+            }
+            return dto;
+        }
     }
 }

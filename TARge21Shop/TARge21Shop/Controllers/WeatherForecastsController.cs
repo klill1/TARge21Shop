@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TARge21Shop.Core.Dto;
+using TARge21Shop.Core.Dto.WeatherDtos;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Models.Weather;
 
@@ -70,6 +71,38 @@ namespace TARge21Shop.Controllers
             vm.NightHasPrecipitation = dto.NightHasPrecipitation;
             vm.NightPrecipitationType = dto.NightPrecipitationType;
             vm.NightPrecipitationIntensity = dto.NightPrecipitationIntensity;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult ShowOpenWeather()
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("CityOpenWeather", "WeatherForecasts");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public IActionResult CityOpenWeather()
+        {
+            OpenWeatherResultDto dto = new OpenWeatherResultDto();
+
+            _weatherForecastServices.WeatherDetailsForOpenWeather(dto);
+
+            OpenWeatherViewModel vm = new OpenWeatherViewModel();
+
+            vm.CityName = dto.CityName;
+            vm.Temperature = dto.Temperature;
+            vm.TempFeelsLike = dto.TempFeelsLike;
+            vm.Humidity = dto.Humidity;
+            vm.Pressure = dto.Pressure;
+            vm.WindSpeed = dto.WindSpeed;
+            vm.WeatherCondition = dto.WeatherCondition;
 
             return View(vm);
         }
