@@ -7,7 +7,8 @@ using TARge21Shop.ApplicationServices.Services;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
 using TARge21Shop.SpaceshipTest.Macros;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using TARge21Shop.SpaceshipTest.Mock;
 
 namespace TARge21Shop.SpaceshipTest
 {
@@ -39,18 +40,9 @@ namespace TARge21Shop.SpaceshipTest
 
         public virtual void SetupServices(IServiceCollection services)
         {
-            //var testHostingEnvironment = new MockHostingEnvironment();
-            //var builder = new WebHostBuilder()
-            //            .Configure(app => { })
-            //            .ConfigureServices(services =>
-            //            {
-            //                services.AddSingleton<IWebHostEnvironment>(testHostingEnvironment);
-            //            });
-            //var server = new TARge21ShopContext(builder);
-
             services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
             services.AddScoped<IFilesServices, FilesServices>();
-            services.AddScoped<IWebHostEnvironment>();
+            services.AddScoped<IHostEnvironment, MockIHostEnviroment>();
 
             services.AddDbContext<TARge21ShopContext>(x =>
             {

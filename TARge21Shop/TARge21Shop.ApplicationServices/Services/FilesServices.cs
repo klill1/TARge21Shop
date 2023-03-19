@@ -9,18 +9,19 @@ using TARge21Shop.Core.Domain;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
+using Microsoft.Extensions.Hosting;
 
 namespace TARge21Shop.ApplicationServices.Services
 {
     public class FilesServices : IFilesServices
     {
         private readonly TARge21ShopContext _context;
-        private readonly IHostingEnvironment _webHost;
+        private readonly IHostEnvironment _webHost;
 
         public FilesServices
             (
                 TARge21ShopContext context,
-                IHostingEnvironment webHost
+                IHostEnvironment webHost
             )
         {
             _context = context;
@@ -88,14 +89,14 @@ namespace TARge21Shop.ApplicationServices.Services
 
             if (dto.Files != null && dto.Files.Count > 0)
             {
-                if (!Directory.Exists(_webHost.WebRootPath + "\\multipleFileUpload\\"))
+                if (!Directory.Exists(_webHost.ContentRootPath + "\\multipleFileUpload\\"))
                 {
-                    Directory.CreateDirectory(_webHost.WebRootPath + "\\multipleFileUpload\\");
+                    Directory.CreateDirectory(_webHost.ContentRootPath + "\\multipleFileUpload\\");
                 }
 
                 foreach (var image in dto.Files)
                 {
-                    string uploadsFolder = Path.Combine(_webHost.WebRootPath, "multipleFileUpload");
+                    string uploadsFolder = Path.Combine(_webHost.ContentRootPath, "multipleFileUpload");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
@@ -124,7 +125,7 @@ namespace TARge21Shop.ApplicationServices.Services
                 var imageId = await _context.FileToApis
                     .FirstOrDefaultAsync(x => x.ExistingFilePath == dto.ExistingFilePath);
 
-                var filePath = _webHost.WebRootPath + "\\multipleFileUpload\\" + imageId.ExistingFilePath;
+                var filePath = _webHost.ContentRootPath + "\\multipleFileUpload\\" + imageId.ExistingFilePath;
 
                 if (File.Exists(filePath))
                 {
@@ -144,7 +145,7 @@ namespace TARge21Shop.ApplicationServices.Services
             var imageId = await _context.FileToApis
                 .FirstOrDefaultAsync(x => x.Id == dto.Id);
 
-            var filePath = _webHost.WebRootPath + "\\multipleFileUpload\\" + imageId.ExistingFilePath;
+            var filePath = _webHost.ContentRootPath + "\\multipleFileUpload\\" + imageId.ExistingFilePath;
 
             if (File.Exists(filePath))
             {
