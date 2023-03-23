@@ -4,6 +4,7 @@ using System.Xml.Linq;
 using TARge21Shop.Core.Domain;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
+using TARge21Shop.SpaceshipTest.Mock;
 using Xunit;
 
 namespace TARge21Shop.SpaceshipTest
@@ -75,6 +76,19 @@ namespace TARge21Shop.SpaceshipTest
             Assert.Equal(result, addSpaceship);
         }
 
+        //[Fact]
+        //public async Task ShouldNot_DeleteByIdSpaceship_WhenDidNotDeleteSpaceship()
+        //{
+        //    SpaceshipDto spaceship = MockSpaceshipData();
+        //    var addSpaceship = await Svc<ISpaceshipsServices>().Create(spaceship);
+
+        //    var wrongGuid = Guid.Parse(Guid.NewGuid().ToString());
+
+        //    var result = await Svc<ISpaceshipsServices>().Delete(wrongGuid);
+
+        //    Assert.NotEqual(result.Id.ToString(), addSpaceship.Id.ToString());
+        //}
+
         [Fact]
         private async Task Should_UpdateSpaceship_WhenUpdateData()
         {
@@ -122,8 +136,20 @@ namespace TARge21Shop.SpaceshipTest
             Assert.DoesNotMatch(result.EnginePower.ToString(), createSpaceship.EnginePower.ToString());
             Assert.Equal(result.Crew, createSpaceship.Crew);
             Assert.NotEqual(result.ModifiedAt, createSpaceship.ModifiedAt);
-           
         }
+
+        //[Fact]
+        //private async Task ShouldNot_UpdateSpaceship_WhenNotUpdateData()
+        //{
+        //    SpaceshipDto dto = MockSpaceshipData();
+        //    var createSpaceship = await Svc<ISpaceshipsServices>().Create(dto);
+
+        //    SpaceshipDto nullUpdate = MockNullSpaceship();
+        //    var result = Svc<ISpaceshipsServices>().Update(nullUpdate);
+
+        //    Assert.NotEqual(result.Id, createSpaceship.Id);
+        //}
+   
 
         private SpaceshipDto MockSpaceshipData()
         {
@@ -168,5 +194,29 @@ namespace TARge21Shop.SpaceshipTest
 
             return spaceship;
         }
+
+        private SpaceshipDto MockNullSpaceship()
+        {
+            SpaceshipDto nullDto = new()
+            {
+                Name = null,
+                Type = null,
+                Crew = 123,
+                Passengers = 123,
+                CargoWeight = 123,
+                FullTripsCount = 123,
+                MaintenanceCount = 1000,
+                LastMaintenance = DateTime.Now,
+                EnginePower = 1000,
+                MaidenLaunch = DateTime.Now,
+                BuiltDate = DateTime.Now,
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+            };
+
+            return nullDto;
+        }
+
+
     }
 }
